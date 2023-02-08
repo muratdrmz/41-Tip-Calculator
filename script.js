@@ -1,0 +1,38 @@
+const billInput = document.getElementById("billTotalInput");
+const tipInput = document.getElementById("tipInput");
+const numberOfPeopleDiv = document.getElementById("numberOfPeople");
+const perPersonTotalDiv = document.getElementById("perPersonTotal");
+
+let numberOfPeople=Number(numberOfPeopleDiv.innerText)
+
+const calculateBill=()=>{
+ const bill=Number(billInput.value); 
+ const tipPercentage=Number(tipInput.value)/100;
+ const tipAmount=bill*tipPercentage;
+ const total=tipAmount+bill;
+ const perPersonTotal=total/numberOfPeople;
+
+ perPersonTotalDiv.innerText = `$${perPersonTotal
+   .toFixed(2)
+   .toLocaleString("en-US")}`;
+
+ console.log(bill, tipPercentage, tipAmount, total, perPersonTotal);
+}
+
+const increasePeople=()=>{
+ numberOfPeople+=1;
+ numberOfPeopleDiv.innerText=numberOfPeople;
+ calculateBill();
+}
+
+const decreasePeople=()=>{
+ if(numberOfPeople<=1){
+  alert('Hey! you can not have less than 1 person!')
+  throw ('Hey! you can not have less than 1 person!')
+  // return
+  }
+ numberOfPeople-=1;
+ numberOfPeopleDiv.innerText = numberOfPeople;
+ calculateBill();
+}
+
